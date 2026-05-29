@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bright Solution — Private Investment Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A96E;
+    --gold-light: #E8D5A3;
+    --gold-dark: #9A7A48;
+    --black: #080A0C;
+    --dark: #0E1117;
+    --dark2: #151B24;
+    --dark3: #1C2533;
+    --text: #D4C9B8;
+    --text-muted: #7A8494;
+    --white: #F5F0E8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(8,10,12,0.95), transparent);
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .logo span {
+    color: var(--white);
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+  }
+
+  nav ul a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  nav ul a:hover { color: var(--gold); }
+
+  .nav-cta {
+    border: 1px solid var(--gold-dark);
+    color: var(--gold) !important;
+    padding: 10px 24px;
+    transition: all 0.3s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--gold) !important;
+    color: var(--black) !important;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,169,110,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,169,110,0.04) 0%, transparent 50%);
+  }
+
+  .hero-line {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 55%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(201,169,110,0.15) 30%, rgba(201,169,110,0.15) 70%, transparent);
+  }
+
+  .hero-tag {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    animation: fadeUp 1s ease both;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 8vw, 110px);
+    font-weight: 300;
+    line-height: 0.95;
+    color: var(--white);
+    max-width: 700px;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    margin-top: 48px;
+    max-width: 420px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-muted);
+    animation: fadeUp 1s 0.4s ease both;
+  }
+
+  .hero-actions {
+    margin-top: 56px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    animation: fadeUp 1s 0.6s ease both;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--black);
+    padding: 16px 40px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    color: var(--text-muted);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.3s;
+  }
+
+  .btn-ghost:hover { color: var(--gold); }
+
+  .btn-ghost::after {
+    content: '→';
+    font-size: 16px;
+  }
+
+  /* STATS ROW */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid rgba(201,169,110,0.12);
+    border-bottom: 1px solid rgba(201,169,110,0.12);
+    margin: 0 60px;
+    animation: fadeUp 1s 0.8s ease both;
+  }
+
+  .stat-item {
+    padding: 40px;
+    border-right: 1px solid rgba(201,169,110,0.12);
+    position: relative;
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-num sup {
+    font-size: 24px;
+    vertical-align: super;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* HOW IT WORKS */
+  section {
+    padding: 120px 60px;
+  }
+
+  .section-tag {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-tag::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.1;
+    max-width: 600px;
+    margin-bottom: 80px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  /* STEPS */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(201,169,110,0.1);
+  }
+
+  .step {
+    background: var(--dark);
+    padding: 48px 40px;
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  .step:hover { background: var(--dark2); }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    font-weight: 300;
+    color: rgba(201,169,110,0.1);
+    line-height: 1;
+    margin-bottom: 24px;
+    transition: color 0.3s;
+  }
+
+  .step:hover .step-num { color: rgba(201,169,110,0.25); }
+
+  .step h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .step p {
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--text-muted);
+  }
+
+  /* RETURNS */
+  .returns-section {
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .returns-section::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .returns-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .returns-left { }
+
+  .returns-desc {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--text-muted);
+    max-width: 420px;
+    margin-bottom: 48px;
+  }
+
+  .highlight-box {
+    border: 1px solid rgba(201,169,110,0.2);
+    padding: 32px;
+    background: rgba(201,169,110,0.03);
+    margin-bottom: 24px;
+  }
+
+  .highlight-box .label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 12px;
+  }
+
+  .highlight-box .value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .highlight-box .value span {
+    font-size: 20px;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .highlight-box .note {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 10px;
+  }
+
+  .returns-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: rgba(201,169,110,0.1);
+  }
+
+  .return-row {
+    background: var(--dark2);
+    padding: 28px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .return-row:hover { background: var(--dark3); }
+
+  .return-row .r-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .return-row .r-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--gold);
+  }
+
+  /* SECURITY */
+  .security-section { }
+
+  .security-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(201,169,110,0.08);
+    margin-top: 60px;
+  }
+
+  .security-card {
+    background: var(--dark);
+    padding: 48px 40px;
+    transition: background 0.3s;
+  }
+
+  .security-card:hover { background: var(--dark2); }
+
+  .security-icon {
+    width: 48px; height: 48px;
+    border: 1px solid rgba(201,169,110,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    margin-bottom: 28px;
+  }
+
+  .security-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+
+  .security-card p {
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--text-muted);
+  }
+
+  /* ABOUT */
+  .about-section {
+    background: var(--dark);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+
+  .about-text {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--text-muted);
+  }
+
+  .about-text p + p { margin-top: 20px; }
+
+  .company-badge {
+    border: 1px solid rgba(201,169,110,0.2);
+    padding: 32px;
+    margin-top: 40px;
+  }
+
+  .company-badge .cb-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 8px;
+  }
+
+  .company-badge .cb-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--white);
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+
+  .company-badge .cb-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .guarantors {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: rgba(201,169,110,0.08);
+  }
+
+  .guarantor-item {
+    background: var(--dark2);
+    padding: 28px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .guarantor-item .g-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--white);
+    font-weight: 400;
+  }
+
+  .guarantor-item .g-type {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    border: 1px solid rgba(201,169,110,0.2);
+    padding: 6px 14px;
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 120px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(201,169,110,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-section .section-tag {
+    justify-content: center;
+  }
+
+  .cta-section .section-tag::before { display: none; }
+
+  .cta-section .section-title {
+    margin: 0 auto 24px;
+    text-align: center;
+    max-width: 700px;
+  }
+
+  .cta-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin: 0 auto 56px;
+  }
+
+  .contact-cards {
+    display: inline-flex;
+    gap: 1px;
+    background: rgba(201,169,110,0.1);
+    margin-bottom: 60px;
+  }
+
+  .contact-card {
+    background: var(--dark);
+    padding: 32px 48px;
+    text-align: center;
+    min-width: 200px;
+    transition: background 0.3s;
+    cursor: pointer;
+  }
+
+  .contact-card:hover { background: var(--dark2); }
+
+  .contact-card .cc-icon { font-size: 24px; margin-bottom: 12px; }
+
+  .contact-card .cc-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 8px;
+  }
+
+  .contact-card .cc-val {
+    font-size: 12px;
+    color: var(--text);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid rgba(201,169,110,0.1);
+    padding: 40px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer .logo { font-size: 18px; }
+
+  .footer-note {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .footer-right {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,169,110,0.15) 30%, rgba(201,169,110,0.15) 70%, transparent);
+    margin: 0 60px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* TICKER */
+  .ticker {
+    background: var(--dark2);
+    border-top: 1px solid rgba(201,169,110,0.1);
+    border-bottom: 1px solid rgba(201,169,110,0.1);
+    padding: 14px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .ticker-inner {
+    display: inline-flex;
+    gap: 80px;
+    animation: ticker 30s linear infinite;
+  }
+
+  .ticker-item {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .ticker-item .dot {
+    width: 4px; height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    nav ul { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .stats-row { margin: 0 24px; grid-template-columns: 1fr; }
+    section { padding: 80px 24px; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .returns-grid { grid-template-columns: 1fr; gap: 40px; }
+    .security-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .cta-section { padding: 80px 24px; }
+    footer { padding: 30px 24px; flex-direction: column; gap: 16px; text-align: center; }
+    .divider { margin: 0 24px; }
+    .hero-line { display: none; }
+    .contact-cards { flex-direction: column; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">BRIGHT <span>Solution</span></a>
+  <ul>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#returns">Returns</a></li>
+    <li><a href="#security">Security</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Invest Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+
+  <div class="hero-tag">Private Investment Platform · Indonesia</div>
+
+  <h1>Capital<br>That Works<br><em>For You</em></h1>
+
+  <p class="hero-sub">
+    Bright Solution provides institutional-grade payment agent services, generating consistent returns for private investors through secured trade finance operations.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Start Investing</a>
+    <a href="#how" class="btn-ghost">Learn how it works</a>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item"><span class="dot"></span> 3% Monthly Return</span>
+    <span class="ticker-item"><span class="dot"></span> Secured Trade Finance</span>
+    <span class="ticker-item"><span class="dot"></span> Corporate Guarantors</span>
+    <span class="ticker-item"><span class="dot"></span> Indonesian Legal Entity</span>
+    <span class="ticker-item"><span class="dot"></span> 36% Annual Yield</span>
+    <span class="ticker-item"><span class="dot"></span> Transparent Operations</span>
+    <span class="ticker-item"><span class="dot"></span> 3% Monthly Return</span>
+    <span class="ticker-item"><span class="dot"></span> Secured Trade Finance</span>
+    <span class="ticker-item"><span class="dot"></span> Corporate Guarantors</span>
+    <span class="ticker-item"><span class="dot"></span> Indonesian Legal Entity</span>
+    <span class="ticker-item"><span class="dot"></span> 36% Annual Yield</span>
+    <span class="ticker-item"><span class="dot"></span> Transparent Operations</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-row reveal">
+  <div class="stat-item">
+    <div class="stat-num">3<sup>%</sup></div>
+    <div class="stat-label">Monthly return for investors</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">36<sup>%</sup></div>
+    <div class="stat-label">Annual yield</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">2<sup>+</sup></div>
+    <div class="stat-label">Corporate guarantors backing every deal</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-tag">Process</div>
+  <h2 class="section-title reveal">How Your Capital <em>Generates</em> Returns</h2>
+
+  <div class="steps reveal">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>You Invest</h3>
+      <p>Transfer funds under a formal agreement. Your capital is protected by two corporate guarantors with full documentation provided.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>We Deploy</h3>
+      <p>Bright Solution acts as payment agent for trade transactions. We advance funds to vendors on behalf of buyers, securing goods and contracts.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Deal Closes</h3>
+      <p>Once delivery is confirmed, the exchange guarantor releases the buyer's funds. Transaction is complete, profit is realized.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h3>You Earn</h3>
+      <p>3% monthly return credited to you. Your principal remains intact, ready for the next cycle or withdrawal on request.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RETURNS -->
+<section id="returns" class="returns-section">
+  <div class="section-tag">Returns</div>
+  <h2 class="section-title reveal">Predictable, <em>Consistent</em> Income</h2>
+
+  <div class="returns-grid reveal">
+    <div class="returns-left">
+      <p class="returns-desc">
+        Our payment agent model generates stable margins on every transaction. We share those margins directly with our investors, providing one of the most competitive fixed-income yields available in private trade finance.
+      </p>
+
+      <div class="highlight-box">
+        <div class="label">Monthly Investor Return</div>
+        <div class="value">3% <span>/ month</span></div>
+        <div class="note">Fixed. Consistent. Secured by corporate guarantors.</div>
+      </div>
+
+      <div class="highlight-box">
+        <div class="label">Annual Equivalent</div>
+        <div class="value">36% <span>/ year</span></div>
+        <div class="note">Simple interest on invested capital.</div>
+      </div>
+    </div>
+
+    <div class="returns-right">
+      <div class="return-row">
+        <div class="r-label">$10,000 invested → monthly income</div>
+        <div class="r-val">$300</div>
+      </div>
+      <div class="return-row">
+        <div class="r-label">$50,000 invested → monthly income</div>
+        <div class="r-val">$1,500</div>
+      </div>
+      <div class="return-row">
+        <div class="r-label">$100,000 invested → monthly income</div>
+        <div class="r-val">$3,000</div>
+      </div>
+      <div class="return-row">
+        <div class="r-label">$10,000 invested → annual income</div>
+        <div class="r-val">$3,600</div>
+      </div>
+      <div class="return-row">
+        <div class="r-label">$50,000 invested → annual income</div>
+        <div class="r-val">$18,000</div>
+      </div>
+      <div class="return-row">
+        <div class="r-label">$100,000 invested → annual income</div>
+        <div class="r-val">$36,000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SECURITY -->
+<section id="security" class="security-section">
+  <div class="section-tag">Protection</div>
+  <h2 class="section-title reveal">Built on <em>Trust</em> & Verified Guarantees</h2>
+
+  <div class="security-grid reveal">
+    <div class="security-card">
+      <div class="security-icon">⚖</div>
+      <h3>Legal Framework</h3>
+      <p>All investments are structured under formal agreements through Bright Solution, a registered Indonesian company. Full documentation provided before any capital is deployed.</p>
+    </div>
+    <div class="security-card">
+      <div class="security-icon">🏛</div>
+      <h3>Corporate Guarantors</h3>
+      <p>Two established companies act as guarantors on every deal: a construction holding and an industrial production company. Their assets back your investment.</p>
+    </div>
+    <div class="security-card">
+      <div class="security-icon">🔒</div>
+      <h3>Escrow Protection</h3>
+      <p>Buyer funds are held in escrow by a third-party exchange guarantor until delivery is confirmed. This protects all parties and ensures payment integrity.</p>
+    </div>
+    <div class="security-card">
+      <div class="security-icon">📋</div>
+      <h3>Full Transparency</h3>
+      <p>Investors receive detailed documentation for every transaction their capital supports. No hidden fees, no vague strategies — you see exactly where your money works.</p>
+    </div>
+    <div class="security-card">
+      <div class="security-icon">🌏</div>
+      <h3>International Operations</h3>
+      <p>Registered and operating in Indonesia with cross-border trade finance experience. Established relationships with exchanges and verified commodity vendors.</p>
+    </div>
+    <div class="security-card">
+      <div class="security-icon">💼</div>
+      <h3>Experienced Management</h3>
+      <p>Our team brings hands-on experience in trade finance, commodity contracts, and payment processing across multiple markets and jurisdictions.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about" class="about-section">
+  <div class="section-tag">About</div>
+  <h2 class="section-title reveal">Who Stands <em>Behind</em> Bright Solution</h2>
+
+  <div class="about-grid reveal">
+    <div class="about-left">
+      <div class="about-text">
+        <p>Bright Solution is an Indonesian payment agent company specializing in trade finance facilitation. We bridge the gap between buyers and sellers in commodity and goods markets — advancing payments so transactions close faster, safely, and without risk to either party.</p>
+        <p>Most buyers on major exchanges hesitate to pay vendors first. We solve this by acting as the trusted intermediary — paying the vendor, confirming delivery, and then receiving the buyer's escrowed funds. This creates consistent, repeatable transaction revenue.</p>
+        <p>We also participate in commodity and goods contracts, generating additional yield that flows directly to our investor partners.</p>
+      </div>
+
+      <div class="company-badge">
+        <div class="cb-label">Registered Entity</div>
+        <div class="cb-name">Bright Solution</div>
+        <div class="cb-desc">Indonesian Company · Trade Finance & Payment Services</div>
+      </div>
+    </div>
+
+    <div class="about-right">
+      <div class="section-tag" style="margin-bottom: 32px;">Corporate Guarantors</div>
+      <div class="guarantors">
+        <div class="guarantor-item">
+          <div>
+            <div class="g-name">Construction Holding</div>
+            <div style="font-size:11px; color: var(--text-muted); margin-top:4px;">Real assets · Infrastructure projects</div>
+          </div>
+          <div class="g-type">Guarantor</div>
+        </div>
+        <div class="guarantor-item">
+          <div>
+            <div class="g-name">Max's Production Plant</div>
+            <div style="font-size:11px; color: var(--text-muted); margin-top:4px;">Industrial manufacturing · Verified entity</div>
+          </div>
+          <div class="g-type">Guarantor</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 32px; padding: 28px; border: 1px solid rgba(201,169,110,0.15); font-size:12px; line-height:1.8; color: var(--text-muted);">
+        Both companies participate in every investor agreement as formal guarantors, bearing legal responsibility alongside Bright Solution. Full company documents available on request.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="cta-section">
+  <div class="section-tag">Get Started</div>
+  <h2 class="section-title reveal">Ready to Put Your<br>Capital to <em>Work?</em></h2>
+  <p class="cta-desc reveal">
+    Reach out directly to discuss investment terms, review documentation, and get started. Minimum investment and terms available upon request.
+  </p>
+
+  <div class="contact-cards reveal">
+    <div class="contact-card">
+      <div class="cc-icon">✉</div>
+      <div class="cc-label">Email</div>
+      <div class="cc-val">contact@brightsolution.id</div>
+    </div>
+    <div class="contact-card">
+      <div class="cc-icon">💬</div>
+      <div class="cc-label">Telegram</div>
+      <div class="cc-val">@brightsolution</div>
+    </div>
+    <div class="contact-card">
+      <div class="cc-icon">📞</div>
+      <div class="cc-label">WhatsApp</div>
+      <div class="cc-val">Available on request</div>
+    </div>
+  </div>
+
+  <a href="mailto:contact@brightsolution.id" class="btn-primary">Request Investment Details</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="logo">BRIGHT <span>Solution</span></a>
+  <div class="footer-note">
+    This platform is for qualified private investors only.<br>Past performance does not guarantee future results.
+  </div>
+  <div class="footer-right">© 2026 Bright Solution · Indonesia</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Stagger children
+  document.querySelectorAll('.steps, .security-grid, .returns-right, .guarantors').forEach(parent => {
+    Array.from(parent.children).forEach((child, i) => {
+      child.style.transitionDelay = `${i * 0.08}s`;
+    });
+  });
+</script>
+
+</body>
+</html>
