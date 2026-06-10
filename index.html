@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>White Rock Finance Limited</title>
+<style>
+:root {
+  --ink: #0A0A0F;
+  --ink2: #13131A;
+  --ink3: #1A1A24;
+  --stone: #2A2A38;
+  --silver: #8A8FA8;
+  --silver-light: #B8BCCF;
+  --white: #F2F0EC;
+  --cream: #E8E4DC;
+  --gold: #C8A96A;
+  --gold2: #A88A4A;
+  --gold-pale: #E8D4A8;
+  --accent: #4A6FA5;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--white);
+  font-family: 'Georgia', 'Times New Roman', serif;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* GRAIN */
+body::after {
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:9998;
+  opacity:0.025;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top:0; left:0; right:0;
+  z-index:1000;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding: 28px 64px;
+  background: linear-gradient(to bottom, rgba(10,10,15,0.98) 0%, transparent 100%);
+  backdrop-filter: blur(2px);
+}
+
+.logo-wrap { display:flex; flex-direction:column; gap:2px; }
+.logo-main {
+  font-family: 'Georgia', serif;
+  font-size: 18px;
+  font-weight: normal;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+.logo-sub {
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.nav-right { display:flex; align-items:center; gap:40px; }
+
+.lang-toggle {
+  display:flex;
+  border: 1px solid rgba(200,169,106,0.3);
+  overflow:hidden;
+}
+.lang-btn {
+  padding: 7px 0;
+  width: 44px;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  color: var(--silver);
+  cursor: pointer;
+  font-family: 'Georgia', serif;
+  transition: all 0.3s;
+}
+.lang-btn.active {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.nav-links { display:flex; gap:32px; list-style:none; }
+.nav-links a {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--silver);
+  text-decoration:none;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+
+.nav-cta {
+  padding: 10px 28px;
+  background: none;
+  border: 1px solid var(--gold2);
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration:none;
+  font-family: 'Georgia', serif;
+  transition: all 0.3s;
+}
+.nav-cta:hover { background: var(--gold); color: var(--ink); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding: 0 64px 100px;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-bg {
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse 100% 70% at 60% 30%, rgba(200,169,106,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 10% 90%, rgba(74,111,165,0.05) 0%, transparent 50%),
+    linear-gradient(175deg, #0A0A0F 0%, #13131A 100%);
+}
+
+/* Geometric lines */
+.hero-geo {
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+.geo-line {
+  position:absolute;
+  background: rgba(200,169,106,0.08);
+}
+.geo-line-1 { top:0; left:42%; width:1px; height:100%; }
+.geo-line-2 { top:0; left:70%; width:1px; height:60%; opacity:0.5; }
+.geo-line-3 { top:45%; left:0; right:0; height:1px; opacity:0.4; }
+
+.hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 32px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  animation: fadeUp 1s ease both;
+}
+.hero-eyebrow::before {
+  content:'';
+  width:50px; height:1px;
+  background: var(--gold);
+}
+
+.hero h1 {
+  font-family: 'Georgia', serif;
+  font-size: clamp(52px, 7.5vw, 120px);
+  font-weight: normal;
+  line-height: 0.92;
+  color: var(--white);
+  max-width: 750px;
+  position:relative;
+  animation: fadeUp 1s 0.15s ease both;
+}
+.hero h1 em {
+  font-style:italic;
+  color: var(--gold);
+}
+
+.hero-desc {
+  margin-top: 48px;
+  max-width: 460px;
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--silver-light);
+  font-family: 'Georgia', serif;
+  position:relative;
+  animation: fadeUp 1s 0.3s ease both;
+}
+
+.hero-actions {
+  margin-top: 56px;
+  display:flex;
+  gap:24px;
+  align-items:center;
+  position:relative;
+  animation: fadeUp 1s 0.45s ease both;
+}
+
+.btn-primary {
+  padding: 16px 44px;
+  background: var(--gold);
+  color: var(--ink);
+  font-family: 'Georgia', serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration:none;
+  border:none;
+  cursor:pointer;
+  transition: all 0.3s;
+  display:inline-block;
+}
+.btn-primary:hover { background: var(--gold-pale); transform:translateY(-2px); }
+
+.btn-outline {
+  padding: 16px 44px;
+  background: none;
+  border: 1px solid rgba(200,169,106,0.35);
+  color: var(--gold);
+  font-family: 'Georgia', serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration:none;
+  transition: all 0.3s;
+  display:inline-block;
+}
+.btn-outline:hover { border-color: var(--gold); background: rgba(200,169,106,0.05); }
+
+/* TICKER */
+.ticker-wrap {
+  background: var(--ink2);
+  border-top: 1px solid rgba(200,169,106,0.12);
+  border-bottom: 1px solid rgba(200,169,106,0.12);
+  padding: 16px 0;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.ticker-track {
+  display:inline-flex;
+  gap:64px;
+  animation: ticker 35s linear infinite;
+}
+.tick {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--silver);
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.tick-dot { width:4px; height:4px; background:var(--gold); border-radius:50%; flex-shrink:0; }
+
+/* STATS */
+.stats-band {
+  display:grid;
+  grid-template-columns: repeat(6,1fr);
+  border-bottom: 1px solid rgba(200,169,106,0.1);
+}
+.stat-cell {
+  padding: 48px 40px;
+  border-right: 1px solid rgba(200,169,106,0.1);
+  transition: background 0.3s;
+}
+.stat-cell:last-child { border-right:none; }
+.stat-cell:hover { background: rgba(200,169,106,0.03); }
+.stat-n {
+  font-family: 'Georgia', serif;
+  font-size: 44px;
+  font-weight:normal;
+  color: var(--gold);
+  line-height:1;
+  margin-bottom:8px;
+}
+.stat-n sup { font-size:20px; vertical-align:super; }
+.stat-l {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--silver);
+  line-height:1.5;
+}
+
+/* SECTIONS */
+section { padding: 120px 64px; }
+section.dark { background: var(--ink2); }
+section.darker { background: var(--ink3); }
+
+.s-tag {
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.s-tag::before { content:''; width:32px; height:1px; background:var(--gold); }
+
+.s-title {
+  font-family: 'Georgia', serif;
+  font-size: clamp(32px, 4.5vw, 62px);
+  font-weight:normal;
+  color: var(--white);
+  line-height:1.08;
+  max-width:640px;
+  margin-bottom:72px;
+}
+.s-title em { font-style:italic; color:var(--gold); }
+
+/* WHO WE ARE */
+.who-grid {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:80px;
+  align-items:start;
+}
+.who-text p {
+  font-size:14px;
+  line-height:1.9;
+  color:var(--silver-light);
+  margin-bottom:20px;
+}
+.clients-list {
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+  background: rgba(200,169,106,0.1);
+  margin-top:40px;
+}
+.client-item {
+  background: var(--ink3);
+  padding: 18px 28px;
+  font-size:12px;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color: var(--silver-light);
+  display:flex;
+  align-items:center;
+  gap:16px;
+  transition: background 0.3s;
+}
+.client-item:hover { background: var(--stone); }
+.client-item::before { content:'—'; color:var(--gold); font-size:14px; }
+
+.who-right {
+  position:relative;
+}
+.years-badge {
+  border: 1px solid rgba(200,169,106,0.25);
+  padding:48px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.years-badge::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background: radial-gradient(circle at 50% 50%, rgba(200,169,106,0.05) 0%, transparent 70%);
+}
+.years-n {
+  font-family:'Georgia',serif;
+  font-size:100px;
+  font-weight:normal;
+  color:var(--gold);
+  line-height:1;
+  margin-bottom:8px;
+  position:relative;
+}
+.years-l {
+  font-size:10px;
+  letter-spacing:0.35em;
+  text-transform:uppercase;
+  color:var(--silver);
+  position:relative;
+}
+
+/* PROBLEM */
+.problem-grid {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:80px;
+  align-items:center;
+}
+.problem-intro {
+  font-size:16px;
+  line-height:1.85;
+  color:var(--silver-light);
+  margin-bottom:40px;
+}
+.problem-items {
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+  background:rgba(200,169,106,0.1);
+}
+.problem-item {
+  background:var(--ink2);
+  padding:24px 32px;
+  display:flex;
+  gap:20px;
+  align-items:flex-start;
+  transition:background 0.3s;
+}
+.problem-item:hover { background:var(--ink3); }
+.pi-icon { color:var(--gold); font-size:18px; flex-shrink:0; margin-top:2px; }
+.pi-text { font-size:13px; line-height:1.6; color:var(--silver-light); }
+
+.problem-right { }
+.problem-quote {
+  border-left: 2px solid var(--gold);
+  padding: 32px 40px;
+  background: transparent;
+}
+.problem-quote p {
+  font-family:'Georgia',serif;
+  font-size:22px;
+  line-height:1.7;
+  color:var(--gold);
+  font-style:italic;
+  opacity: 0.85;
+}
+
+/* HOW IT WORKS */
+.steps-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:rgba(200,169,106,0.08);
+}
+.step {
+  background:var(--ink2);
+  padding:48px 36px;
+  transition:background 0.3s;
+}
+.step:hover { background:var(--ink3); }
+.step-n {
+  font-family:'Georgia',serif;
+  font-size:72px;
+  font-weight:normal;
+  color:rgba(200,169,106,0.12);
+  line-height:1;
+  margin-bottom:24px;
+  transition:color 0.3s;
+}
+.step:hover .step-n { color:rgba(200,169,106,0.28); }
+.step h3 {
+  font-family:'Georgia',serif;
+  font-size:20px;
+  font-weight:normal;
+  color:var(--white);
+  margin-bottom:16px;
+}
+.step p { font-size:12px; line-height:1.85; color:var(--silver); }
+
+/* EXAMPLE BOX */
+.example-box {
+  background:var(--ink3);
+  border:1px solid rgba(200,169,106,0.15);
+  padding:56px;
+  margin-top:64px;
+  position:relative;
+  overflow:hidden;
+}
+.example-box::before {
+  content:'';
+  position:absolute;
+  top:-100px; right:-100px;
+  width:400px; height:400px;
+  background:radial-gradient(circle, rgba(200,169,106,0.05) 0%, transparent 70%);
+}
+.example-tag {
+  font-size:10px;
+  letter-spacing:0.35em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:32px;
+}
+.example-flow {
+  display:flex;
+  align-items:center;
+  gap:0;
+  flex-wrap:wrap;
+}
+.ef-step {
+  flex:1;
+  min-width:160px;
+  padding:28px 24px;
+  border:1px solid rgba(200,169,106,0.12);
+  text-align:center;
+  position:relative;
+}
+.ef-step:not(:last-child)::after {
+  content:'→';
+  position:absolute;
+  right:-18px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--gold);
+  font-size:20px;
+  z-index:2;
+}
+.ef-label { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--silver); margin-bottom:8px; }
+.ef-val { font-family:'Georgia',serif; font-size:22px; color:var(--white); }
+.ef-sub { font-size:11px; color:var(--silver); margin-top:4px; }
+
+/* ANALOGY */
+.analogy-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:64px;
+  align-items:center;
+}
+.analogy-text p { font-size:14px; line-height:1.9; color:var(--silver-light); margin-bottom:20px; }
+.analogy-visual {
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+  background:rgba(200,169,106,0.1);
+}
+.av-row {
+  background:var(--ink3);
+  padding:28px 32px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  transition:background 0.3s;
+}
+.av-row:hover { background:var(--stone); }
+.av-label { font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--silver); }
+.av-val { font-family:'Georgia',serif; font-size:28px; color:var(--gold); }
+
+/* REVENUE */
+.revenue-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+}
+.rev-text p { font-size:14px; line-height:1.9; color:var(--silver-light); margin-bottom:20px; }
+.rev-highlight {
+  border:1px solid rgba(200,169,106,0.2);
+  padding:40px;
+  background:rgba(200,169,106,0.03);
+  margin-top:32px;
+}
+.rh-label { font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold2); margin-bottom:12px; }
+.rh-val { font-family:'Georgia',serif; font-size:52px; color:var(--gold); line-height:1; }
+.rh-val span { font-size:20px; color:var(--silver); font-family:'Georgia',serif; }
+.rh-note { font-size:11px; color:var(--silver); margin-top:10px; line-height:1.6; }
+
+.scenarios {
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+  background:rgba(200,169,106,0.1);
+}
+.scenario {
+  background:var(--ink3);
+  padding:36px 40px;
+  transition:background 0.3s;
+}
+.scenario:hover { background:var(--stone); }
+.sc-label { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
+.sc-row {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+.sc-key { font-size:12px; color:var(--silver); }
+.sc-val { font-family:'Georgia',serif; font-size:20px; color:var(--white); }
+.sc-income { font-family:'Georgia',serif; font-size:28px; color:var(--gold); }
+
+/* INVESTMENT */
+.invest-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+}
+.not-used {
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+  background:rgba(200,169,106,0.08);
+}
+.nu-item {
+  background:var(--ink3);
+  padding:20px 28px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  font-size:12px;
+  color:var(--silver);
+}
+.nu-x { color:#6A4A4A; font-size:16px; }
+.used-box {
+  border:1px solid rgba(200,169,106,0.2);
+  padding:40px;
+  background:rgba(200,169,106,0.03);
+  margin-top:32px;
+}
+.ub-label { font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+.ub-text { font-size:14px; line-height:1.85; color:var(--silver-light); }
+
+/* INVESTOR RETURNS */
+.returns-table {
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+  background:rgba(200,169,106,0.1);
+}
+.rt-row {
+  background:var(--ink2);
+  padding:24px 36px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  transition:background 0.3s;
+}
+.rt-row:hover { background:var(--ink3); }
+.rt-row.header { background:var(--ink3); }
+.rt-row.header .rt-label, .rt-row.header .rt-val { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--silver); }
+.rt-label { font-size:13px; color:var(--silver-light); }
+.rt-val { font-family:'Georgia',serif; font-size:26px; color:var(--gold); }
+
+/* RISK */
+.risk-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:rgba(200,169,106,0.08);
+  margin-top:60px;
+}
+.risk-card {
+  background:var(--ink2);
+  padding:48px 36px;
+  transition:background 0.3s;
+}
+.risk-card:hover { background:var(--ink3); }
+.risk-icon { font-size:28px; margin-bottom:24px; }
+.risk-card h3 { font-family:'Georgia',serif; font-size:20px; font-weight:normal; color:var(--white); margin-bottom:16px; }
+.risk-card p { font-size:12px; line-height:1.85; color:var(--silver); }
+
+/* CTA */
+.cta-section {
+  padding:120px 64px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  background:var(--ink2);
+}
+.cta-section::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse 60% 80% at 50% 50%, rgba(200,169,106,0.06) 0%, transparent 65%);
+  pointer-events:none;
+}
+.cta-section .s-tag { justify-content:center; }
+.cta-section .s-tag::before { display:none; }
+.cta-title {
+  font-family:'Georgia',serif;
+  font-size:clamp(36px,5vw,72px);
+  font-weight:normal;
+  color:var(--white);
+  margin:0 auto 24px;
+  max-width:700px;
+  line-height:1.05;
+  position:relative;
+}
+.cta-title em { font-style:italic; color:var(--gold); }
+.cta-desc { font-size:14px; line-height:1.85; color:var(--silver); max-width:460px; margin:0 auto 56px; position:relative; }
+.contact-row {
+  display:inline-flex;
+  gap:1px;
+  background:rgba(200,169,106,0.1);
+  margin-bottom:56px;
+  position:relative;
+}
+.contact-card {
+  background:var(--ink3);
+  padding:36px 56px;
+  min-width:200px;
+  transition:background 0.3s;
+  cursor:pointer;
+}
+.contact-card:hover { background:var(--stone); }
+.cc-icon { font-size:22px; margin-bottom:12px; }
+.cc-label { font-size:10px; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold2); margin-bottom:8px; }
+.cc-val { font-size:12px; color:var(--silver-light); }
+
+/* ONBOARDING */
+.onboarding-steps { max-width:680px; margin:48px auto 0; }
+.ob-step { display:flex; gap:28px; align-items:flex-start; }
+.ob-num { flex-shrink:0; width:48px; height:48px; border:1px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; letter-spacing:0.15em; color:var(--gold); font-weight:600; }
+.ob-content { padding-bottom:8px; }
+.ob-content h3 { font-size:16px; font-weight:600; color:var(--white); margin:10px 0 8px; letter-spacing:0.05em; }
+.ob-content p { font-size:14px; color:var(--silver); line-height:1.75; margin:0; }
+.ob-connector { width:1px; height:32px; background:var(--border); margin-left:23px; }
+.ob-doc-link { display:inline-flex; align-items:center; gap:8px; margin-top:14px; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); text-decoration:none; font-family:"Georgia",serif; border-bottom:1px solid rgba(200,169,106,0.3); padding-bottom:2px; transition:all 0.3s; }
+.ob-doc-link:hover { color:var(--gold-pale); border-color:var(--gold); }
+
+/* PARTNERS */
+.partners-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:40px; }
+.partners-grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; max-width:calc(66.66% - 8px); margin:24px auto 0; }
+@media(max-width:768px){ .partners-grid, .partners-grid-2 { grid-template-columns:1fr; max-width:100%; } }
+.partner-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:32px 28px; }
+.partner-icon { font-size:32px; margin-bottom:16px; }
+.partner-name { font-size:18px; font-weight:700; color:var(--white); margin-bottom:6px; }
+.partner-since { font-size:12px; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:16px; }
+.partner-card p { font-size:14px; color:var(--silver); line-height:1.7; margin:0; }
+.section-sub { max-width:600px; margin:0 auto; text-align:center; color:var(--silver); font-size:16px; line-height:1.7; }
+@media(max-width:768px){ .partners-grid { grid-template-columns:1fr; } }
+
+/* COMPANY DOCUMENTS */
+.docs-block {
+  margin-top: 64px;
+  border-top: 1px solid rgba(200,169,106,0.12);
+  padding-top: 48px;
+}
+.docs-label {
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.docs-label::before { content:''; width:32px; height:1px; background:var(--gold); }
+.docs-cards {
+  display: flex;
+  gap: 1px;
+  background: rgba(200,169,106,0.1);
+}
+.doc-card {
+  background: var(--ink3);
+  padding: 32px 36px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  transition: background 0.3s;
+}
+.doc-card:hover { background: var(--stone); }
+.doc-card-left { display: flex; align-items: center; gap: 20px; }
+.doc-pdf-icon {
+  width: 44px;
+  height: 52px;
+  border: 1px solid rgba(200,169,106,0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.doc-pdf-icon::after {
+  content: 'PDF';
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  position: absolute;
+  bottom: 7px;
+}
+.doc-pdf-icon svg { margin-bottom: 10px; }
+.doc-info {}
+.doc-name {
+  font-family: 'Georgia', serif;
+  font-size: 15px;
+  color: var(--white);
+  margin-bottom: 5px;
+}
+.doc-meta {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--silver);
+}
+.doc-btn {
+  padding: 10px 24px;
+  border: 1px solid rgba(200,169,106,0.3);
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: 'Georgia', serif;
+  white-space: nowrap;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+.doc-btn:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+@media(max-width:900px) {
+  .docs-cards { flex-direction: column; }
+  .doc-card { flex-wrap: wrap; }
+}
+
+/* FOOTER */
+footer {
+  padding:40px 64px;
+  border-top:1px solid rgba(200,169,106,0.1);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.footer-note { font-size:11px; color:var(--silver); text-align:center; line-height:1.6; }
+.footer-right { font-size:11px; color:var(--silver); letter-spacing:0.1em; }
+
+/* DIVIDER */
+.divider { height:1px; background:linear-gradient(to right, transparent, rgba(200,169,106,0.15) 30%, rgba(200,169,106,0.15) 70%, transparent); margin:0 64px; }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(32px); }
+  to { opacity:1; transform:translateY(0); }
+}
+@keyframes ticker {
+  from { transform:translateX(0); }
+  to { transform:translateX(-50%); }
+}
+.reveal { opacity:0; transform:translateY(36px); transition:opacity 0.85s ease, transform 0.85s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* RESPONSIVE */
+@media(max-width:900px) {
+  nav { padding:20px 24px; }
+  .nav-links { display:none; }
+  .hero { padding:0 24px 80px; }
+  .stats-band { grid-template-columns:1fr 1fr; }
+  .stat-cell:nth-child(5) { grid-column:span 1; }
+  .stat-cell:nth-child(6) { grid-column:span 1; }
+  section { padding:80px 24px; }
+  .who-grid, .problem-grid, .analogy-grid, .revenue-grid, .invest-grid { grid-template-columns:1fr; gap:40px; }
+  .steps-grid { grid-template-columns:1fr 1fr; }
+  .risk-grid { grid-template-columns:1fr; }
+  .example-flow { flex-direction:column; }
+  .ef-step::after { display:none !important; }
+  .contact-row { flex-direction:column; width:100%; }
+  footer { flex-direction:column; gap:16px; text-align:center; padding:30px 24px; }
+  .divider { margin:0 24px; }
+  .cta-section { padding:80px 24px; }
+  .example-box { padding:32px 24px; }
+}
+
+/* i18n: hide non-active language */
+[data-en], [data-ru] { }
+html[data-lang="en"] .ru-only { display:none !important; }
+html[data-lang="ru"] .en-only { display:none !important; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo-wrap">
+    <div class="logo-main">White Rock</div>
+    <div class="logo-sub">Finance Limited</div>
+  </div>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#who"><span class="en-only">About</span><span class="ru-only">О нас</span></a></li>
+      <li><a href="#how"><span class="en-only">How It Works</span><span class="ru-only">Как работает</span></a></li>
+      <li><a href="#returns"><span class="en-only">Returns</span><span class="ru-only">Доходность</span></a></li>
+      <li><a href="#invest"><span class="en-only">Invest</span><span class="ru-only">Инвестировать</span></a></li>
+    </ul>
+    <a href="https://t.me/whiterockfin" target="_blank" class="nav-cta"><span class="en-only">Get Started</span><span class="ru-only">Начать</span></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-geo">
+    <div class="geo-line geo-line-1"></div>
+    <div class="geo-line geo-line-2"></div>
+    <div class="geo-line geo-line-3"></div>
+  </div>
+
+  <div class="hero-eyebrow">
+    <span class="en-only">International Payment Agent · Hong Kong · Since 2021</span>
+    <span class="ru-only">Международные расчёты · Гонконг · С 2021 года</span>
+  </div>
+
+  <h1>
+    <span class="en-only">Capital<br>Working at<br><em>Global Scale</em></span>
+    <span class="ru-only">Капитал,<br>работающий на<br><em>глобальном уровне</em></span>
+  </h1>
+
+  <p class="hero-desc">
+    <span class="en-only">White Rock Finance Limited provides international payment agent services, generating <strong>2% monthly returns</strong> for private investors. Minimum entry — <strong>$10,000</strong>. Term — <strong>3 months</strong>. Income backed by real commercial operations.</span>
+    <span class="ru-only">White Rock Finance Limited обеспечивает агентское сопровождение международных платежей, генерируя <strong>2% в месяц</strong> для частных инвесторов. Минимальный вход — <strong>$10 000</strong>. Срок — <strong>3 месяца</strong>. Доход обеспечен реальными коммерческими операциями.</span>
+  </p>
+
+  <div class="hero-actions">
+    <a href="https://t.me/whiterockfin" target="_blank" class="btn-primary"><span class="en-only">Investment Opportunity</span><span class="ru-only">Инвестиционная возможность</span></a>
+    <a href="#how" class="btn-outline"><span class="en-only">How It Works</span><span class="ru-only">Как это работает</span></a>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="tick"><span class="tick-dot"></span><span class="en-only">Formal Investment Agreements</span><span class="ru-only">Официальные инвестиционные договоры</span></span>
+    <span class="tick"><span class="tick-dot"></span><span class="en-only">$126M+ Processed in 2025</span><span class="ru-only">$126 млн обработано в 2025 году</span></span>
+    <span class="tick"><span class="tick-dot"></span><span class="en-only">2% Monthly Investor Return</span><span class="ru-only">2% в месяц для инвесторов</span></span>
+    <span class="tick"><span class="tick-dot"></span><span class="en-only">Registered in Hong Kong · Zero Profit Tax</span><span class="ru-only">Зарегистрирована в Гонконге · Нет налога на прибыль</span></span>
+    <span class="tick"><span class="tick-dot"></span><span class="en-only">4+ Years of Operations</span><span class="ru-only">4+ года работы</span></span>
+    <span class="tick"><span class="tick-dot"></span><span class="en-only">International Trade Finance</span><span class="ru-only">Международное торговое финансирование</span></span>
+    <span class="tick"><span class="tick-dot"></span><span class="en-only">Formal Investment Agreements</span><span class="ru-only">Официальные инвестиционные договоры</span></span>
+    <span class="tick"><span class="tick-dot"></span><span class="en-only">$126M+ Processed in 2025</span><span class="ru-only">$126 млн обработано в 2025 году</span></span>
+    <span class="tick"><span class="tick-dot"></span><span class="en-only">2% Monthly Investor Return</span><span class="ru-only">2% в месяц для инвесторов</span></span>
+    <span class="tick"><span class="tick-dot"></span><span class="en-only">Registered in Hong Kong · Zero Profit Tax</span><span class="ru-only">Зарегистрирована в Гонконге · Нет налога на прибыль</span></span>
+    <span class="tick"><span class="tick-dot"></span><span class="en-only">4+ Years of Operations</span><span class="ru-only">4+ года работы</span></span>
+    <span class="tick"><span class="tick-dot"></span><span class="en-only">International Trade Finance</span><span class="ru-only">Международное торговое финансирование</span></span>
+  </div>
+</div>
+
+<!-- STATS BAND -->
+<div class="stats-band reveal">
+  <div class="stat-cell">
+    <div class="stat-n">$126<sup>M</sup></div>
+    <div class="stat-l"><span class="en-only">Total volume processed<br>in 2025</span><span class="ru-only">Объём платежей<br>в 2025 году</span></div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">$10.5<sup>M</sup></div>
+    <div class="stat-l"><span class="en-only">Average monthly<br>volume</span><span class="ru-only">Среднемесячный<br>объём</span></div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">2<sup>%</sup></div>
+    <div class="stat-l"><span class="en-only">Monthly return<br>for investors</span><span class="ru-only">Ежемесячный доход<br>инвесторов</span></div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">24<sup>%</sup></div>
+    <div class="stat-l"><span class="en-only">Annual yield<br>equivalent</span><span class="ru-only">Годовая доходность<br>эквивалент</span></div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">0.5<sup>%</sup></div>
+    <div class="stat-l"><span class="en-only">Commission per<br>transaction</span><span class="ru-only">Комиссия за<br>операцию</span></div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">4<sup>+</sup></div>
+    <div class="stat-l"><span class="en-only">Years of proven<br>operations</span><span class="ru-only">Лет успешной<br>работы</span></div>
+  </div>
+</div>
+
+<!-- WHO WE ARE -->
+<section id="who" class="dark">
+  <div class="s-tag"><span class="en-only">About</span><span class="ru-only">О компании</span></div>
+  <h2 class="s-title reveal">
+    <span class="en-only"><em>Who</em> We Are</span>
+    <span class="ru-only"><em>Кто</em> мы такие</span>
+  </h2>
+
+  <div class="who-grid reveal">
+    <div class="who-text">
+      <p>
+        <span class="en-only">For over 4 years, White Rock Finance Limited has been organizing international payment settlements and providing agency payment support for global businesses. We help companies send and receive payments across borders — quickly, reliably, without the need to build complex international infrastructure.</span>
+        <span class="ru-only">Более 4 лет White Rock Finance Limited занимается организацией международных расчётов и агентским сопровождением платежей для бизнеса. Мы помогаем компаниям быстро получать и отправлять платежи между разными странами без необходимости самостоятельно выстраивать сложную международную платёжную инфраструктуру.</span>      </p>
+      <p>
+        <span class="en-only">Our business model is built on real commercial operations — not speculation or financial derivatives. Every return we generate for investors is backed by an actual transaction.</span>
+        <span class="ru-only">Наша бизнес-модель построена на реальных коммерческих операциях, а не на спекуляциях или финансовых инструментах. Каждый доход, который мы генерируем для инвесторов, обеспечен реальной транзакцией.</span>
+      </p>
+      <p>
+        <span class="en-only">White Rock Finance Limited is registered in Hong Kong — one of the world's leading financial jurisdictions. Hong Kong imposes no tax on profits derived from international operations, which means more of the fund's earnings flow directly to investors.</span>
+        <span class="ru-only">White Rock Finance Limited зарегистрирована в Гонконге — одном из ведущих мировых финансовых центров. В Гонконге отсутствует налог на прибыль от международных операций, что позволяет направлять максимум дохода фонда непосредственно инвесторам.</span>
+      </p>
+
+      <div class="clients-list">
+        <div class="client-item"><span class="en-only">Online Stores</span><span class="ru-only">Онлайн-магазины</span></div>
+        
+        <div class="client-item"><span class="en-only">Marketplaces</span><span class="ru-only">Маркетплейсы</span></div>
+        <div class="client-item"><span class="en-only">Real Estate Management Companies</span><span class="ru-only">Управляющие компании недвижимости</span></div>
+        <div class="client-item"><span class="en-only">Importers & Exporters</span><span class="ru-only">Импортёры и экспортёры</span></div>
+      </div>
+    </div>
+
+    <div class="who-right">
+      <div class="years-badge">
+        <div class="years-n">4+</div>
+        <div class="years-l"><span class="en-only">Years in international<br>payment operations</span><span class="ru-only">Года в международных<br>платёжных операциях</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPANY DOCUMENTS -->
+  <div class="docs-block reveal">
+    <div class="docs-label">
+      <span class="en-only">Company Documents</span>
+      <span class="ru-only">Документы компании</span>
+    </div>
+    <div class="docs-cards">
+
+      <div class="doc-card">
+        <div class="doc-card-left">
+          <div class="doc-pdf-icon">
+            <svg width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11 1H3C2.46957 1 1.96086 1.21071 1.58579 1.58579C1.21071 1.96086 1 2.46957 1 3V19C1 19.5304 1.21071 20.0391 1.58579 20.4142C1.96086 20.7893 2.46957 21 3 21H15C15.5304 21 16.0391 20.7893 16.4142 20.4142C16.7893 20.0391 17 19.5304 17 19V7L11 1Z" stroke="rgba(200,169,106,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11 1V7H17" stroke="rgba(200,169,106,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="doc-info">
+            <div class="doc-name">
+              <span class="en-only">Certificate of Incorporation</span>
+              <span class="ru-only">Свидетельство об учреждении</span>
+            </div>
+            <div class="doc-meta">
+              <span class="en-only">Hong Kong Companies Registry · No. 80474277 · 26 May 2026</span>
+              <span class="ru-only">Реестр компаний Гонконга · №80474277 · 26 мая 2026</span>
+            </div>
+          </div>
+        </div>
+        <a href="https://drive.google.com/file/d/1MSTTM_0fU2T_m1C-0HaoT9Z0q-CRwllx/preview" target="_blank" class="doc-btn">
+          <span class="en-only">View PDF</span>
+          <span class="ru-only">Открыть PDF</span>
+        </a>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-card-left">
+          <div class="doc-pdf-icon">
+            <svg width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11 1H3C2.46957 1 1.96086 1.21071 1.58579 1.58579C1.21071 1.96086 1 2.46957 1 3V19C1 19.5304 1.21071 20.0391 1.58579 20.4142C1.96086 20.7893 2.46957 21 3 21H15C15.5304 21 16.0391 20.7893 16.4142 20.4142C16.7893 20.0391 17 19.5304 17 19V7L11 1Z" stroke="rgba(200,169,106,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11 1V7H17" stroke="rgba(200,169,106,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="doc-info">
+            <div class="doc-name">
+              <span class="en-only">Business Registration Certificate</span>
+              <span class="ru-only">Свидетельство о регистрации бизнеса</span>
+            </div>
+            <div class="doc-meta">
+              <span class="en-only">Hong Kong · Valid until 25 May 2027 · Cert. No. 80474277-000-05-26-7</span>
+              <span class="ru-only">Гонконг · Действует до 25 мая 2027 · №80474277-000-05-26-7</span>
+            </div>
+          </div>
+        </div>
+        <a href="https://drive.google.com/file/d/1xXE-39TN91DoxEgcmlPBQk1ZekNW7cMd/preview" target="_blank" class="doc-btn">
+          <span class="en-only">View PDF</span>
+          <span class="ru-only">Открыть PDF</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+<section id="problem">
+  <div class="s-tag"><span class="en-only">The Problem</span><span class="ru-only">Проблема клиента</span></div>
+  <h2 class="s-title reveal">
+    <span class="en-only">Why International Payments <em>Slow Business Down</em></span>
+    <span class="ru-only">Почему международные платежи <em>замедляют бизнес</em></span>
+  </h2>
+
+  <div class="problem-grid reveal">
+    <div>
+      <p class="problem-intro">
+        <span class="en-only">In international settlements, money rarely moves instantly. A payment can take hours, days, or even longer depending on the country, bank, and payment route. For business, this directly affects profit.</span>
+        <span class="ru-only">В международных расчётах деньги редко движутся мгновенно. Платёж может идти несколько часов, дней или дольше — в зависимости от страны, банка и маршрута. Для бизнеса это означает прямые потери.</span>
+      </p>
+      <div class="problem-items">
+        <div class="problem-item"><span class="pi-icon">◆</span><span class="pi-text"><span class="en-only">Delivery delays that disrupt supply chains</span><span class="ru-only">Задержки поставок</span></span></div>
+        <div class="problem-item"><span class="pi-icon">◆</span><span class="pi-text"><span class="en-only">Frozen working capital that can't be reused</span><span class="ru-only">Замороженный оборотный капитал</span></span></div>
+        <div class="problem-item"><span class="pi-icon">◆</span><span class="pi-text"><span class="en-only">Cash flow gaps at critical moments</span><span class="ru-only">Кассовые разрывы</span></span></div>
+        <div class="problem-item"><span class="pi-icon">◆</span><span class="pi-text"><span class="en-only">Lost clients who move to faster competitors</span><span class="ru-only">Потеря клиентов из-за медленных расчётов</span></span></div>
+      </div>
+    </div>
+    <div class="problem-right">
+      <div class="problem-quote">
+        <p>
+          <span class="en-only">"The speed of settlements directly affects the client's profit. We solve this by deploying our own capital instantly — before the banking system completes its cycle."</span>
+          <span class="ru-only">«Скорость расчётов напрямую влияет на прибыль клиента. Мы решаем это, немедленно задействуя собственный капитал — до завершения банковского цикла.»</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="dark">
+  <div class="s-tag"><span class="en-only">Our Solution</span><span class="ru-only">Наше решение</span></div>
+  <h2 class="s-title reveal">
+    <span class="en-only">How We <em>Execute</em> Payments</span>
+    <span class="ru-only">Как мы <em>исполняем</em> платежи</span>
+  </h2>
+
+  <div class="steps-grid reveal">
+    <div class="step">
+      <div class="step-n">01</div>
+      <h3><span class="en-only">Client Request</span><span class="ru-only">Поручение клиента</span></h3>
+      <p><span class="en-only">A business needs to make an international payment. They submit the instruction to White Rock Finance Limited.</span><span class="ru-only">Бизнес размещает поручение на проведение международного платежа через White Rock Finance Limited.</span></p>
+    </div>
+    <div class="step">
+      <div class="step-n">02</div>
+      <h3><span class="en-only">Instant Execution</span><span class="ru-only">Мгновенное исполнение</span></h3>
+      <p><span class="en-only">We pay the recipient immediately from our own working capital. The vendor receives funds and ships the goods without delay.</span><span class="ru-only">Мы производим оплату поставщику сразу из собственного оборотного капитала. Поставщик получает деньги и отгружает товар немедленно.</span></p>
+    </div>
+    <div class="step">
+      <div class="step-n">03</div>
+      <h3><span class="en-only">Settlement Cycle</span><span class="ru-only">Расчётный цикл</span></h3>
+      <p><span class="en-only">The banking system completes the international transfer. Upon completion, the corresponding funds are returned to our capital pool.</span><span class="ru-only">Банковская система завершает фактический международный перевод. После завершения средства возвращаются в наш оборотный пул.</span></p>
+    </div>
+    <div class="step">
+      <div class="step-n">04</div>
+      <h3><span class="en-only">Commission Earned</span><span class="ru-only">Комиссия получена</span></h3>
+      <p><span class="en-only">White Rock earns 0.5% commission on the transaction. This revenue funds investor returns and funds the next cycle.</span><span class="ru-only">White Rock получает комиссию 0,5% от суммы операции. Этот доход обеспечивает выплаты инвесторам и финансирует следующий цикл.</span></p>
+    </div>
+  </div>
+
+  <!-- EXAMPLE -->
+  <div class="example-box reveal">
+    <div class="example-tag"><span class="en-only">Transaction Example</span><span class="ru-only">Пример сделки</span></div>
+    <div class="example-flow">
+      <div class="ef-step">
+        <div class="ef-label"><span class="en-only">Buyer</span><span class="ru-only">Покупатель</span></div>
+        <div class="ef-val"><span class="en-only">Indonesia</span><span class="ru-only">Индонезия</span></div>
+        <div class="ef-sub"><span class="en-only">Places order</span><span class="ru-only">Размещает заказ</span></div>
+      </div>
+      <div class="ef-step">
+        <div class="ef-label"><span class="en-only">Transaction</span><span class="ru-only">Сумма</span></div>
+        <div class="ef-val">$100,000</div>
+        <div class="ef-sub"><span class="en-only">Goods from Thailand</span><span class="ru-only">Товар из Таиланда</span></div>
+      </div>
+      <div class="ef-step">
+        <div class="ef-label"><span class="en-only">White Rock Pays</span><span class="ru-only">White Rock платит</span></div>
+        <div class="ef-val"><span class="en-only">Instantly</span><span class="ru-only">Мгновенно</span></div>
+        <div class="ef-sub"><span class="en-only">From own capital</span><span class="ru-only">Из собственного капитала</span></div>
+      </div>
+      <div class="ef-step">
+        <div class="ef-label"><span class="en-only">Commission</span><span class="ru-only">Комиссия</span></div>
+        <div class="ef-val">$500</div>
+        <div class="ef-sub">0.5%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ANALOGY -->
+<section>
+  <div class="s-tag"><span class="en-only">Business Model</span><span class="ru-only">Бизнес-модель</span></div>
+  <h2 class="s-title reveal">
+    <span class="en-only">Think of Us as a <em>Currency Exchange</em></span>
+    <span class="ru-only">Мы работаем как <em>обменный пункт</em></span>
+  </h2>
+
+  <div class="analogy-grid reveal">
+    <div class="analogy-text">
+      <p><span class="en-only">An exchange bureau doesn't earn by holding money. It earns through constant capital turnover. The more transactions flow through the system, the greater the aggregate income.</span><span class="ru-only">Обменник не зарабатывает на хранении денег. Он зарабатывает на постоянном обороте капитала. Чем больше операций проходит через систему, тем больше совокупный доход.</span></p>
+      <p><span class="en-only">White Rock Finance applies the same principle to international payment settlement. The same capital participates in multiple operations throughout the year, generating commission income on every cycle.</span><span class="ru-only">White Rock Finance применяет тот же принцип в международных расчётах. Один и тот же капитал участвует во множестве операций в течение года, генерируя комиссионный доход на каждом цикле.</span></p>
+      <p><span class="en-only">Revenue doesn't depend on asset price growth. It depends on payment volume — a real, measurable metric tied to client business activity.</span><span class="ru-only">Доход не зависит от роста стоимости активов. Он зависит от объёма платежей — реального, измеримого показателя, привязанного к деловой активности клиентов.</span></p>
+    </div>
+    <div>
+      <div class="analogy-visual">
+        <div class="av-row">
+          <div class="av-label"><span class="en-only">Volume $10M → Commission</span><span class="ru-only">Объём $10 млн → Комиссия</span></div>
+          <div class="av-val">$50,000</div>
+        </div>
+        <div class="av-row">
+          <div class="av-label"><span class="en-only">Avg monthly volume 2025</span><span class="ru-only">Среднемесячный объём 2025</span></div>
+          <div class="av-val">$10.5M</div>
+        </div>
+        <div class="av-row">
+          <div class="av-label"><span class="en-only">Daily volume avg</span><span class="ru-only">Среднесуточный объём</span></div>
+          <div class="av-val">$345K</div>
+        </div>
+        <div class="av-row">
+          <div class="av-label"><span class="en-only">Annual total 2025</span><span class="ru-only">Итого за 2025 год</span></div>
+          <div class="av-val">$126M</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PARTNERS -->
+<section id="partners">
+  <div class="s-tag"><span class="en-only">Operational Partners</span><span class="ru-only">Операционные партнёры</span></div>
+  <h2 class="s-title reveal">
+    <span class="en-only">Real Business <em>Behind the Capital</em></span>
+    <span class="ru-only">Реальный бизнес <em>за капиталом</em></span>
+  </h2>
+  <p class="section-sub reveal">
+    <span class="en-only">White Rock Finance operates with established partners across Russia, Thailand, and Indonesia — covering construction, manufacturing, and international payment processing sectors.</span>
+    <span class="ru-only">White Rock Finance работает совместно с партнёрами в России, Таиланде и Индонезии — строительство, производство и международная обработка платежей.</span>
+  </p>
+
+  <div class="partners-grid reveal">
+    <div class="partner-card">
+      <div class="partner-icon">🏗</div>
+      <div class="partner-name"><span class="en-only">Hydrobalance LLC</span><span class="ru-only">ООО «Гидробаланс»</span></div>
+      <div class="partner-since"><span class="en-only">Est. 2019 · Russia</span><span class="ru-only">Осн. 2019 · Россия</span></div>
+      <p><span class="en-only">Construction company working with top Russian real estate developers. Specialises in infrastructure and engineering projects.</span><span class="ru-only">Строительная компания, работающая с ведущими девелоперами России. Специализация — инфраструктурные и инженерные проекты.</span></p>
+    </div>
+    <div class="partner-card">
+      <div class="partner-icon">🏗</div>
+      <div class="partner-name"><span class="en-only">Vodyanoy LLC</span><span class="ru-only">ООО «Водяной»</span></div>
+      <div class="partner-since"><span class="en-only">Est. 2015 · Russia</span><span class="ru-only">Осн. 2015 · Россия</span></div>
+      <p><span class="en-only">Construction company with 9+ years of operations. Partner of major Russian property developers across residential and commercial segments.</span><span class="ru-only">Строительная компания с 9+ летним опытом работы. Партнёр крупных российских застройщиков в жилом и коммерческом сегменте.</span></p>
+    </div>
+    <div class="partner-card">
+      <div class="partner-icon">🥤</div>
+      <div class="partner-name"><span class="en-only">Freshberry LLC</span><span class="ru-only">ООО «Фрешберри»</span></div>
+      <div class="partner-since"><span class="en-only">Est. 2016 · Russia</span><span class="ru-only">Осн. 2016 · Россия</span></div>
+      <p><span class="en-only">Manufacturing company operating a soft drink production facility. Stable recurring revenue from FMCG distribution across Russian market.</span><span class="ru-only">Производственная компания — завод по выпуску прохладительных напитков. Стабильная выручка от дистрибуции на российском рынке.</span></p>
+    </div>
+  </div>
+  <div class="partners-grid-2 reveal">
+    <div class="partner-card">
+      <div class="partner-icon">🇹🇭</div>
+      <div class="partner-name">SiamCoinSwap</div>
+      <div class="partner-since"><span class="en-only">Est. 2024 · Thailand</span><span class="ru-only">Осн. 2024 · Таиланд</span></div>
+      <p><span class="en-only">Thai payment processing company handling settlements from major rental aggregators including Booking.com and Airbnb. Operates across South-East Asian markets.</span><span class="ru-only">Тайская компания по обработке платежей от крупных агрегаторов аренды, включая Booking.com и Airbnb. Работает на рынках Юго-Восточной Азии.</span></p>
+    </div>
+    <div class="partner-card">
+      <div class="partner-icon">🇮🇩</div>
+      <div class="partner-name">Bright Solution</div>
+      <div class="partner-since"><span class="en-only">Est. 2024 · Indonesia</span><span class="ru-only">Осн. 2024 · Индонезия</span></div>
+      <p><span class="en-only">Indonesian agency payments company providing cross-border payment solutions to businesses worldwide. Covers multiple international corridors and currencies.</span><span class="ru-only">Индонезийская компания агентских платежей, обеспечивающая трансграничные расчёты для бизнеса по всему миру. Работает с множеством международных направлений и валют.</span></p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INVESTMENT CASE -->
+<section id="invest" class="darker">
+  <div class="s-tag"><span class="en-only">Investment Case</span><span class="ru-only">Инвестиционная возможность</span></div>
+  <h2 class="s-title reveal">
+    <span class="en-only">Why We're Raising <em>Private Capital</em></span>
+    <span class="ru-only">Зачем мы привлекаем <em>частный капитал</em></span>
+  </h2>
+
+  <div class="invest-grid reveal">
+    <div>
+      <p style="font-size:14px;line-height:1.9;color:var(--silver-light);margin-bottom:32px;">
+        <span class="en-only">Payment agent operations require capital to be deployed instantly — often across multiple jurisdictions simultaneously. Traditional bank credit is too slow, too restricted by compliance requirements, and structurally incompatible with the speed international trade demands. Private capital solves this: it's flexible, fast to deploy, and aligned with operational cycles rather than banking bureaucracy. In return, investors receive a share of the commission income their capital helps generate.</span>
+        <span class="ru-only">Работа платёжного агента требует мгновенного размещения капитала — нередко одновременно в нескольких юрисдикциях. Банковское кредитование слишком медленное, слишком ограничено комплаенс-требованиями и структурно не совместимо со скоростью международной торговли. Частный капитал решает эту проблему: он гибкий, быстро размещается и соответствует операционным циклам. Взамен инвесторы получают долю комиссионного дохода, который помогает генерировать их капитал.</span>
+      </p>
+
+      <div class="not-used">
+        <div style="padding:16px 28px;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);background:var(--ink3);">
+          <span class="en-only">Funds are NOT used for:</span><span class="ru-only">Средства НЕ направляются на:</span>
+        </div>
+        <div class="nu-item"><span class="nu-x">✗</span><span class="en-only">Product development</span><span class="ru-only">Разработку продукта</span></div>
+        <div class="nu-item"><span class="nu-x">✗</span><span class="en-only">Covering losses</span><span class="ru-only">Покрытие убытков</span></div>
+        <div class="nu-item"><span class="nu-x">✗</span><span class="en-only">Risky investments</span><span class="ru-only">Рискованные инвестиции</span></div>
+        <div class="nu-item"><span class="nu-x">✗</span><span class="en-only">Financial asset trading</span><span class="ru-only">Торговля финансовыми активами</span></div>
+      </div>
+
+      <div class="used-box">
+        <div class="ub-label">✓ <span class="en-only">Funds ARE used for:</span><span class="ru-only">Средства ИСПОЛЬЗУЮТСЯ для:</span></div>
+        <div class="ub-text"><span class="en-only">Executing client payment instructions and increasing the number of simultaneously serviced transactions.</span><span class="ru-only">Исполнения клиентских платёжных поручений и увеличения количества одновременно обслуживаемых сделок.</span></div>
+      </div>
+    </div>
+
+    <div>
+      <div style="margin-bottom:32px;">
+        <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;">
+          <span class="en-only">Why scale matters</span><span class="ru-only">Почему масштаб имеет значение</span>
+        </div>
+        <div class="scenarios">
+          <div class="scenario">
+            <div class="sc-label"><span class="en-only">Scenario A — Current</span><span class="ru-only">Вариант А — Текущий</span></div>
+            <div class="sc-row"><span class="sc-key"><span class="en-only">Working capital</span><span class="ru-only">Оборотный капитал</span></span><span class="sc-val">$1M</span></div>
+            <div class="sc-row"><span class="sc-key"><span class="en-only">Capacity</span><span class="ru-only">Мощность</span></span><span class="sc-val">$1M <span class="en-only">simultaneous</span><span class="ru-only">одновременно</span></span></div>
+          </div>
+          <div class="scenario">
+            <div class="sc-label"><span class="en-only">Scenario B — With Investment</span><span class="ru-only">Вариант Б — С инвестициями</span></div>
+            <div class="sc-row"><span class="sc-key"><span class="en-only">Working capital</span><span class="ru-only">Оборотный капитал</span></span><span class="sc-val">$10M</span></div>
+            <div class="sc-row"><span class="sc-key"><span class="en-only">Capacity</span><span class="ru-only">Мощность</span></span><span class="sc-val">$10M <span class="en-only">simultaneous</span><span class="ru-only">одновременно</span></span></div>
+            <div class="sc-row" style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(200,169,106,0.15);">
+              <span class="sc-key"><span class="en-only">Commission income</span><span class="ru-only">Комиссионный доход</span></span>
+              <span class="sc-income">×10</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RETURNS -->
+<section id="returns" class="dark">
+  <div class="s-tag"><span class="en-only">Investor Returns</span><span class="ru-only">Доход инвестора</span></div>
+  <h2 class="s-title reveal">
+    <span class="en-only">Consistent <em>Monthly Income</em></span>
+    <span class="ru-only">Стабильный <em>ежемесячный доход</em></span>
+  </h2>
+
+  <div class="revenue-grid reveal">
+    <div>
+      <div class="rev-text">
+        <p><span class="en-only">Investor capital is used as working capital. Every payment cycle generates commission income. The same capital participates in many operations throughout the year. Investor income is paid from the profit generated by this turnover.</span><span class="ru-only">Средства инвестора используются как оборотный капитал компании. Каждый платёжный цикл приносит комиссионный доход. Один и тот же капитал участвует во множестве операций в течение года. Доход инвестора выплачивается из прибыли, которую генерирует этот оборот.</span></p>
+      </div>
+      <div class="rev-highlight">
+        <div class="rh-label"><span class="en-only">Monthly Return</span><span class="ru-only">Ежемесячный доход</span></div>
+        <div class="rh-val">2% <span>/ <span class="en-only">month</span><span class="ru-only">месяц</span></span></div>
+        <div class="rh-note"><span class="en-only">24% annual equivalent · Target return · Documented investment agreement</span><span class="ru-only">24% годовых · Целевая доходность · Оформляется официальным договором</span></div>
+      </div>
+
+    </div>
+
+    <div>
+      <div class="returns-table">
+        <div class="rt-row header">
+          <div class="rt-label"><span class="en-only">Investment</span><span class="ru-only">Инвестиция</span></div>
+          <div class="rt-val"><span class="en-only">Monthly Income</span><span class="ru-only">Доход / месяц</span></div>
+        </div>
+        <div class="rt-row"><div class="rt-label">$10,000</div><div class="rt-val">$200</div></div>
+        <div class="rt-row"><div class="rt-label">$25,000</div><div class="rt-val">$500</div></div>
+        <div class="rt-row"><div class="rt-label">$50,000</div><div class="rt-val">$1,000</div></div>
+        <div class="rt-row"><div class="rt-label">$100,000</div><div class="rt-val">$2,000</div></div>
+        <div class="rt-row"><div class="rt-label">$250,000</div><div class="rt-val">$5,000</div></div>
+        <div class="rt-row"><div class="rt-label">$500,000</div><div class="rt-val">$10,000</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RISK -->
+<section>
+  <div class="s-tag"><span class="en-only">Risk Disclosure</span><span class="ru-only">Раскрытие рисков</span></div>
+  <h2 class="s-title reveal">
+    <span class="en-only">Honest Assessment of <em>Risks & Mitigations</em></span>
+    <span class="ru-only">Честная оценка <em>рисков и их снижения</em></span>
+  </h2>
+  <p style="font-size:14px;line-height:1.85;color:var(--silver-light);max-width:640px;" class="reveal">
+    <span class="en-only">No investment is risk-free. Below is an honest overview of the risks inherent to our business model — and how we manage each of them. We believe transparency here builds more trust than promises.</span>
+    <span class="ru-only">Ни одна инвестиция не является безрисковой. Ниже — честный обзор рисков, присущих нашей бизнес-модели, и того, как мы управляем каждым из них. Прозрачность здесь важнее обещаний.</span>
+  </p>
+
+  <div class="risk-grid reveal">
+    <div class="risk-card">
+      <div class="risk-icon">⏱</div>
+      <h3><span class="en-only">Settlement Delays</span><span class="ru-only">Задержки расчётов</span></h3>
+      <p><span class="en-only">International transfers can face unexpected delays due to correspondent banking queues, time zones, or intermediary checks. This may temporarily affect capital availability. Mitigation: we maintain a liquidity buffer and operate with overlapping cycles to ensure payment continuity.</span><span class="ru-only">Международные переводы могут задерживаться из-за корреспондентских очередей, часовых поясов или промежуточных проверок. Это может временно влиять на доступность капитала. Снижение: мы поддерживаем буфер ликвидности и работаем с перекрывающимися циклами.</span></p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-icon">🔍</div>
+      <h3><span class="en-only">Compliance & AML Risk</span><span class="ru-only">Комплаенс и AML риски</span></h3>
+      <p><span class="en-only">Cross-border payments are subject to AML screening and regulatory scrutiny across multiple jurisdictions. Transactions can be flagged or held pending review. Mitigation: we conduct client due diligence on all payment counterparties and operate within established compliance frameworks.</span><span class="ru-only">Трансграничные платежи проходят AML-проверки в нескольких юрисдикциях. Транзакции могут быть задержаны на проверку. Снижение: мы проводим due diligence по всем контрагентам и работаем в рамках установленных комплаенс-процедур.</span></p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-icon">💱</div>
+      <h3><span class="en-only">FX Exposure</span><span class="ru-only">Валютный риск</span></h3>
+      <p><span class="en-only">Operations span multiple currencies and jurisdictions. Exchange rate fluctuations between instruction and settlement can affect net margins. Mitigation: the majority of operations are USD-denominated; FX exposure is actively monitored and limited in scope.</span><span class="ru-only">Операции охватывают несколько валют и юрисдикций. Колебания курсов между поручением и расчётом могут влиять на маржу. Снижение: большинство операций номинировано в USD; валютный риск активно отслеживается.</span></p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-icon">🏦</div>
+      <h3><span class="en-only">Banking Restrictions</span><span class="ru-only">Банковские ограничения</span></h3>
+      <p><span class="en-only">Correspondent banking relationships can change. Banks may restrict certain payment corridors or impose additional requirements without notice. Mitigation: we maintain relationships with multiple banking partners across jurisdictions to ensure operational continuity.</span><span class="ru-only">Корреспондентские банковские отношения могут меняться. Банки могут ограничить отдельные направления или ввести дополнительные требования. Снижение: мы работаем с несколькими банковскими партнёрами в разных юрисдикциях.</span></p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-icon">💧</div>
+      <h3><span class="en-only">Liquidity Timing</span><span class="ru-only">Ликвидность и сроки</span></h3>
+      <p><span class="en-only">Investor capital is deployed in active payment cycles. Early redemption outside of agreed terms may not always be immediately possible. Mitigation: investment terms are structured with clear 3-month cycles; capital is not locked into long-term or illiquid positions.</span><span class="ru-only">Капитал инвестора задействован в активных платёжных циклах. Досрочный выход за пределами согласованных сроков может быть невозможен немедленно. Снижение: инвестиции структурированы чёткими 3-месячными циклами.</span></p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-icon">📋</div>
+      <h3><span class="en-only">Regulatory Changes</span><span class="ru-only">Регуляторные изменения</span></h3>
+      <p><span class="en-only">Payment agent regulations can evolve across jurisdictions. New licensing requirements or operational restrictions may affect business conditions. Mitigation: the company is registered in Hong Kong — a stable, internationally recognised financial jurisdiction — and monitors regulatory developments continuously.</span><span class="ru-only">Регулирование платёжных агентов может меняться в разных юрисдикциях. Новые требования к лицензированию могут повлиять на условия работы. Снижение: компания зарегистрирована в Гонконге — стабильной международно признанной финансовой юрисдикции.</span></p>
+    </div>
+  </div>
+</section>
+
+  <!-- Real estate highlight banner -->
+  <div class="example-box reveal" style="margin-top:48px; border-color:rgba(200,169,106,0.25);">
+    <div style="display:flex; gap:48px; align-items:center; flex-wrap:wrap;">
+      <div style="flex:1; min-width:240px;">
+        <div class="example-tag"><span class="en-only">Asset-Backed Security</span><span class="ru-only">Обеспечение реальными активами</span></div>
+        <div style="font-family:'Georgia',serif; font-size:clamp(22px,3vw,34px); color:var(--white); line-height:1.2; margin:16px 0;">
+          <span class="en-only">Investments structured under<br>formal <em style="color:var(--gold);">legal agreements</em></span>
+          <span class="ru-only">Инвестиции оформлены<br>официальными <em style="color:var(--gold);">договорами</em></span>
+        </div>
+        <div style="font-size:13px; line-height:1.85; color:var(--silver);">
+          <span class="en-only">Every investment is structured under a formal agreement with documented terms, return schedule, and capital conditions.</span>
+          <span class="ru-only">Каждая инвестиция оформляется официальным договором с прописанными условиями, графиком выплат и условиями возврата капитала.</span>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:1px; background:rgba(200,169,106,0.1); min-width:220px;">
+        <div style="background:var(--ink3); padding:24px 32px;">
+          <div style="font-size:10px; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold2); margin-bottom:8px;"><span class="en-only">Collateral Type</span><span class="ru-only">Тип обеспечения</span></div>
+          <div style="font-family:'Georgia',serif; font-size:20px; color:var(--white);"><span class="en-only">Real Estate</span><span class="ru-only">Недвижимость</span></div>
+        </div>
+        <div style="background:var(--ink3); padding:24px 32px;">
+          <div style="font-size:10px; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold2); margin-bottom:8px;"><span class="en-only">Coverage</span><span class="ru-only">Покрытие</span></div>
+          <div style="font-family:'Georgia',serif; font-size:20px; color:var(--gold);">1 : 1</div>
+        </div>
+        <div style="background:var(--ink3); padding:24px 32px;">
+          <div style="font-size:10px; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold2); margin-bottom:8px;"><span class="en-only">Asset Type</span><span class="ru-only">Тип актива</span></div>
+          <div style="font-family:'Georgia',serif; font-size:20px; color:var(--white);"><span class="en-only">Tangible</span><span class="ru-only">Материальный</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ONBOARDING -->
+<section id="onboarding" class="dark">
+  <div class="s-tag"><span class="en-only">Process</span><span class="ru-only">Процесс</span></div>
+  <h2 class="s-title reveal">
+    <span class="en-only">What Happens <em>After You Apply</em></span>
+    <span class="ru-only">Что происходит <em>после заявки</em></span>
+  </h2>
+  <p class="section-sub reveal">
+    <span class="en-only">From first contact to monthly returns — a clear and transparent process.</span>
+    <span class="ru-only">От первого контакта до ежемесячных выплат — чёткий и прозрачный процесс.</span>
+  </p>
+
+  <div class="onboarding-steps reveal">
+    <div class="ob-step">
+      <div class="ob-num">01</div>
+      <div class="ob-content">
+        <h3><span class="en-only">Intro Call</span><span class="ru-only">Знакомство</span></h3>
+        <p><span class="en-only">We schedule a call to discuss your goals, answer questions, and walk you through the investment structure in detail.</span><span class="ru-only">Проводим звонок: обсуждаем ваши цели, отвечаем на вопросы и подробно объясняем структуру инвестирования.</span></p>
+      </div>
+    </div>
+    <div class="ob-connector"></div>
+    <div class="ob-step">
+      <div class="ob-num">02</div>
+      <div class="ob-content">
+        <h3><span class="en-only">Due Diligence</span><span class="ru-only">Проверка</span></h3>
+        <p><span class="en-only">We provide full documentation — company registration, operational history, partner information, and legal framework for your review.</span><span class="ru-only">Предоставляем полный пакет документов — регистрация компании, история операций, информация о партнёрах и юридическая структура.</span></p>
+      </div>
+    </div>
+    <div class="ob-connector"></div>
+    <div class="ob-step">
+      <div class="ob-num">03</div>
+      <div class="ob-content">
+        <h3><span class="en-only">Agreement</span><span class="ru-only">Договор</span></h3>
+        <p><span class="en-only">We sign a formal investment agreement outlining terms, return schedule, and capital protection conditions.</span><span class="ru-only">Подписываем официальный инвестиционный договор с указанием условий, графика выплат и условий защиты капитала.</span></p>
+        <a href="https://drive.google.com/file/d/11YjLte-qHkvlCXO8oBQNZmTSs9V8xXWJ/preview" target="_blank" class="ob-doc-link en-only">
+          <svg width="13" height="16" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 1H3C2.46957 1 1.96086 1.21071 1.58579 1.58579C1.21071 1.96086 1 2.46957 1 3V19C1 19.5304 1.21071 20.0391 1.58579 20.4142C1.96086 20.7893 2.46957 21 3 21H15C15.5304 21 16.0391 20.7893 16.4142 20.4142C16.7893 20.0391 17 19.5304 17 19V7L11 1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 1V7H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          View Sample Agreement
+        </a>
+        <a href="https://drive.google.com/file/d/1oAVi6k69OaF5azbE2wj4APtxmvig4qRj/preview" target="_blank" class="ob-doc-link ru-only">
+          <svg width="13" height="16" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 1H3C2.46957 1 1.96086 1.21071 1.58579 1.58579C1.21071 1.96086 1 2.46957 1 3V19C1 19.5304 1.21071 20.0391 1.58579 20.4142C1.96086 20.7893 2.46957 21 3 21H15C15.5304 21 16.0391 20.7893 16.4142 20.4142C16.7893 20.0391 17 19.5304 17 19V7L11 1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 1V7H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Образец договора
+        </a>
+      </div>
+    </div>
+    <div class="ob-connector"></div>
+    <div class="ob-step">
+      <div class="ob-num">04</div>
+      <div class="ob-content">
+        <h3><span class="en-only">Capital Allocation</span><span class="ru-only">Размещение капитала</span></h3>
+        <p><span class="en-only">Your funds are deployed into the payment cycle. Capital starts working from day one of the agreed term.</span><span class="ru-only">Ваши средства размещаются в платёжном цикле. Капитал начинает работать с первого дня согласованного срока.</span></p>
+      </div>
+    </div>
+    <div class="ob-connector"></div>
+    <div class="ob-step">
+      <div class="ob-num">05</div>
+      <div class="ob-content">
+        <h3><span class="en-only">Monthly Returns</span><span class="ru-only">Ежемесячные выплаты</span></h3>
+        <p><span class="en-only">You receive 2% monthly returns with full reporting. At the end of the term, principal is returned in full.</span><span class="ru-only">Получаете 2% ежемесячно с полной отчётностью. По окончании срока основная сумма возвращается в полном объёме.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<div class="cta-section" id="contact">
+  <div class="s-tag"><span class="en-only">Get Started</span><span class="ru-only">Начать</span></div>
+  <h2 class="cta-title reveal">
+    <span class="en-only">Ready to Put Your<br>Capital to <em>Work?</em></span>
+    <span class="ru-only">Готовы заставить ваш<br>капитал <em>работать?</em></span>
+  </h2>
+  <p class="cta-desc reveal">
+    <span class="en-only">Contact us directly to review documentation, discuss investment terms, and get started. Minimum investment and full terms available on request.</span>
+    <span class="ru-only">Свяжитесь с нами напрямую для ознакомления с документацией, обсуждения условий инвестирования и начала сотрудничества.</span>
+  </p>
+
+  <div class="contact-row reveal">
+    <div class="contact-card">
+      <div class="cc-icon">✉</div>
+      <div class="cc-label">Email</div>
+      <div class="cc-val"><a href="mailto:contact@whiterockfin.com" style="color:var(--silver-light);text-decoration:none;">contact@whiterockfin.com</a></div>
+    </div>
+    <div class="contact-card" onclick="window.open('https://t.me/whiterockfin','_blank')" style="cursor:pointer;">
+      <div class="cc-icon">💬</div>
+      <div class="cc-label">Telegram</div>
+      <div class="cc-val"><a href="https://t.me/whiterockfin" target="_blank" style="color:var(--silver-light);text-decoration:none;">@whiterockfin</a></div>
+    </div>
+    <div class="contact-card" onclick="window.open('https://wa.me/79660968661','_blank')" style="cursor:pointer;">
+      <div class="cc-icon">📞</div>
+      <div class="cc-label">WhatsApp</div>
+      <div class="cc-val"><a href="https://wa.me/79660968661" target="_blank" style="color:var(--silver-light);text-decoration:none;">whiterockfin</a></div>
+    </div>
+  </div>
+
+  <a href="https://t.me/whiterockfin" target="_blank" class="btn-primary reveal">
+    <span class="en-only">Request Investment Details</span>
+    <span class="ru-only">Запросить условия инвестирования</span>
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo-wrap">
+    <div class="logo-main">White Rock</div>
+    <div class="logo-sub">Finance Limited</div>
+  </div>
+  <div class="footer-note">
+    <span class="en-only">
+      WHITE ROCK FINANCE LIMITED · Registration No. 80474277<br>
+      RM 5003, 5/F, Yau Lee Centre, 45 Hoi Yuen Road, Kwun Tong, Hong Kong<br>
+      Incorporated: 26 May 2026 · Business Registration valid until: 25 May 2027<br>
+      © 2026 White Rock Finance Limited · All rights reserved
+    </span>
+    <span class="ru-only">
+      WHITE ROCK FINANCE LIMITED · Рег. номер: 80474277<br>
+      RM 5003, 5/F, Yau Lee Centre, 45 Hoi Yuen Road, Kwun Tong, Hong Kong<br>
+      Дата регистрации: 26 мая 2026 · Бизнес-лицензия действует до: 25 мая 2027<br>
+      © 2026 White Rock Finance Limited · Все права защищены
+    </span>
+  </div>
+  <div class="footer-right">© 2026 White Rock Finance Limited</div>
+</footer>
+
+<script>
+// Language toggle
+function setLang(lang) {
+  document.documentElement.setAttribute('data-lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+  });
+}
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
